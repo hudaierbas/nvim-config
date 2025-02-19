@@ -10,8 +10,8 @@ return {
     require("neo-tree").setup({
       filesystem = {
         filtered_items = {
-          visible = true,      -- Gizli dosyaları göster
-          hide_dotfiles = false, -- Nokta ile başlayan dosyaları göster
+          visible = true,          -- Gizli dosyaları göster
+          hide_dotfiles = false,   -- Nokta ile başlayan dosyaları göster
           hide_gitignored = false, -- .gitignore tarafından gizlenen dosyaları göster
         },
         follow_current_file = {
@@ -20,6 +20,12 @@ return {
         },
         hijack_netrw_behavior = "open_current",
         use_libuv_file_watcher = true,
+        renderers = {
+          file = {
+            { "icon" },
+            { "name", use_git_status_colors = true, truncation_character = "…" }, -- Uzun isimleri kırp
+          }
+        }
       },
     })
     vim.keymap.set('n', '<C-n>', ':Neotree toggle<CR>', { noremap = true, silent = true })
