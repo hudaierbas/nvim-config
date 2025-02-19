@@ -9,6 +9,11 @@ return {
   config = function()
     require("neo-tree").setup({
       filesystem = {
+        filtered_items = {
+          visible = true,      -- Gizli dosyaları göster
+          hide_dotfiles = false, -- Nokta ile başlayan dosyaları göster
+          hide_gitignored = false, -- .gitignore tarafından gizlenen dosyaları göster
+        },
         follow_current_file = {
           enabled = true,
           leave_dirs_open = false,
