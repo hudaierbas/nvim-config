@@ -1,5 +1,8 @@
 return {
   {
+    "github/copilot.vim"
+  },
+  {
     "hrsh7th/cmp-nvim-lsp"
   },
   {
@@ -36,8 +39,8 @@ return {
           { name = "nvim_lsp" },
           { name = "luasnip" }, -- For luasnip users.
         }, {
-          { name = "buffer" },
-        }),
+            { name = "buffer" },
+          }),
       })
     end,
   },
