@@ -21,7 +21,10 @@ return {
 
       local lspconfig = require("lspconfig")
       lspconfig.ts_ls.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
+        on_attach = function(client)
+          client.server_capabilities.diagnostic = false  -- ESLint ile çakışmayı önle
+        end
       })
       lspconfig.html.setup({
         capabilities = capabilities
@@ -29,7 +32,11 @@ return {
       lspconfig.lua_ls.setup({
         capabilities = capabilities
       })
-      lspconfig.eslint.setup {}
+      lspconfig.eslint.setup {
+        settings = {
+          run = "onSave"
+        }
+      }
       lspconfig.omnisharp.setup({
         cmd = { "omnisharp" },
         enable_editorconfig_support = true,
@@ -39,10 +46,23 @@ return {
         enable_import_completion = true,
       })
 
+
+      -- LSP Hata Gösterimi ve Diagnostic Konfigürasyonu
+      vim.diagnostic.config({
+        virtual_text = false, -- Hataları inline olarak gösterme
+        signs = true,         -- Sol sütunda hata işaretlerini göster
+        update_in_insert = false,
+        float = {
+          border = "rounded",
+          source = "always"
+        }
+      })
+
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+      vim.keymap.set('n', '<leader>ge', vim.diagnostic.open_float, { desc = "Show diagnostics in a floating window" })
     end,
   },
 }
