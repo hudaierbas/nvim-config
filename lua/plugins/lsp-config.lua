@@ -23,8 +23,24 @@ return {
       lspconfig.ts_ls.setup({
         capabilities = capabilities,
         on_attach = function(client)
-          client.server_capabilities.diagnostic = false  -- ESLint ile çakışmayı önle
-        end
+          client.server_capabilities.documentFormattingProvider = false -- TSServer'ın formatlama yapmasını engelle
+          --client.server_capabilities.diagnostic = false -- ESLint ile çakışmayı önle
+          client.server_capabilities.publishDiagnosticsProvider = false -- ESLint ile çakışmayı önle
+
+          client.config.settings = {
+            tsserver = {
+              watchOptions = {
+                useFsEvents = true, -- Yalnızca fsEvents kullanarak dosya izlemeyi etkinleştir
+              }
+            }
+          }
+        end,
+        init_options = {
+          maxTsServerMemory = 4096,
+          experimental = {
+            enableProjectDiagnostics = false,
+          },
+        },
       })
       lspconfig.html.setup({
         capabilities = capabilities

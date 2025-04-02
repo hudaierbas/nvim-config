@@ -1,3 +1,6 @@
+vim.keymap.set("n", "<C-Up>", "<C-w>>", {})
+vim.keymap.set("n", "<C-Down>", "<C-w><", {})
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
