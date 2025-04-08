@@ -48,11 +48,22 @@ return {
       lspconfig.lua_ls.setup({
         capabilities = capabilities
       })
-      lspconfig.eslint.setup {
-        settings = {
-          run = "onSave"
-        }
-      }
+      -- lspconfig.eslint.setup {
+      --   settings = {
+      --     run = "onSave"
+      --   }
+      -- }
+      -- lspconfig.eslint.setup({
+      --   on_attach = function(client)
+      --     client.server_capabilities.documentFormattingProvider = false
+      --     client.server_capabilities.codeActionProvider = false
+      --     client.server_capabilities.diagnosticProvider = false -- varsa bunu da kapat
+      --
+      --     -- Eğer `diagnosticProvider` çalışmazsa, aşağıdaki gibi publishDiagnostics işlevini override edebilirsin:
+      --     client.handlers["textDocument/publishDiagnostics"] = function() end
+      --   end,
+      -- })
+
       lspconfig.omnisharp.setup({
         cmd = { "omnisharp" },
         enable_editorconfig_support = true,

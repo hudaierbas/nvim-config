@@ -11,8 +11,10 @@ return {
         --Lua
         null_ls.builtins.formatting.stylua,
 
-        --JS TS
-        null_ls.builtins.formatting.prettier,
+        -- JS/TS with single quotes
+        null_ls.builtins.formatting.prettier.with({
+          extra_args = { "--single-quote" },
+        }),
         require("none-ls.diagnostics.eslint_d"),
 
         -- C#
